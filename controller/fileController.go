@@ -31,7 +31,6 @@ func (a *FileController) UploadOne(c *gin.Context) {
 		err := c.SaveUploadedFile(f, "."+destImage)
 		if err != nil {
 			//fmt.Println("save err:")
-			//fmt.Println(err)
 			result.Error(1006, "图片保存失败")
 		} else {
 			imageUrl := global.ArticleImageSetting.ImageHost + destImage
