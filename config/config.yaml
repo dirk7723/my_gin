@@ -1,9 +1,9 @@
 Database:
   DBType: mysql
-  UserName: shutuiche
-  Password: shutuiche2020
-  Host: 121.5.244.122:3306
-  DBName: potatocar
+  UserName: root
+  Password: root
+  Host: localhost:3306
+  DBName: newbee
   Charset: utf8
   ParseTime: True
   MaxIdleConns: 10

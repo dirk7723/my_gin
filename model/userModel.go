@@ -8,16 +8,8 @@ import (
 type UserModel struct{}
 
 type User struct {
-	Id               int    `json:"id"`
-	Truename         string `json:"truename"`
-	Nickname         string `json:"nickname"`
-	Kol_avatar_url   string `json:"kol_avatar_url"`
-	Class_id         int    `json:"class_id"`
-	Class_name       string `json:"class_name"`
-	Fans_nums        int    `json:"fans_nums"`
-	Zan_collent_nums int    `json:"zan_collent_nums"`
-	Interactive_nums int    `json:"interactive_nums"`
-	Leave_date       string `json:"leave_date"`
+	Id       int    `json:"id"`
+	Username string `json:"username"`
 }
 
 // type Param_user struct {
@@ -34,4 +26,21 @@ func (m UserModel) List(param map[string]interface{}) []*User {
 	var Users []*User
 	queryDB.Scan(&Users)
 	return Users
+}
+
+func (m UserModel) Find(param map[string]interface{}) []*User {
+	var user []*User
+	f1, f2 := false, false
+	if _, ok := param["username"].(string); ok {
+		//global.Db.Where("username = ?", username).First(&user)
+		f1 = true
+	}
+	if _, ok := param["password"].(string); ok {
+		//global.Db.Where("username = ?", username).First(&user)
+		f2 = true
+	}
+	if f1 && f2 {
+		global.Db.Where("username = ? AND password = ?", param["username"], param["password"]).First(&user)
+	}
+	return user
 }

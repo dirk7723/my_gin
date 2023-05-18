@@ -17,6 +17,8 @@ func Router() *gin.Engine {
 	router.NoRoute(HandleNotFound)
 	router.NoMethod(HandleNotFound)
 	router.Use(middleware.AccessLog())
+	//跨域
+	router.Use(middleware.Cors())
 	router.Use(Recover)
 
 	//static
@@ -27,6 +29,14 @@ func Router() *gin.Engine {
 
 	FileController := controller.NewFileController()
 	router.POST("/upload_file", FileController.UploadOne)
+	lg := controller.NewLoginController()
+	router.POST("/login", lg.Index)
+	router.Any("/test", middleware.Auth(), func(c *gin.Context) {
+		//request := c.MustGet("request").(string)
+		c.JSON(http.StatusOK, gin.H{
+			"msg": "success",
+		})
+	})
 	return router
 }
 

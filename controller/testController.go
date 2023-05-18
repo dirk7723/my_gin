@@ -31,12 +31,12 @@ type User struct {
 	Leave_date       string `json:"leave_date"`
 }
 
-type Param_user struct {
+type param_user struct {
 	Shop_name string `form:"shop_name"`
 }
 
 func (a TestController) Index(c *gin.Context) {
-	var param Param_user
+	var param param_user
 	err := c.ShouldBind(&param)
 	result := result.NewResult(c)
 	if err != nil {
