@@ -36,6 +36,7 @@ func GetToken(username string) (string, error) {
 }
 
 func ParseToken(tokenSring string) (*MyClaims, error) {
+	fmt.Println("dasd")
 	token, err := jwt.ParseWithClaims(tokenSring, &MyClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return mySecret, nil
 	})

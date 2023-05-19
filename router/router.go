@@ -37,6 +37,7 @@ func Router() *gin.Engine {
 			"msg": "success",
 		})
 	})
+	router.POST("/menu", controller.Menucontroller{}.Index)
 	return router
 }
 

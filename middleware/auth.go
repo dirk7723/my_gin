@@ -10,12 +10,12 @@ import (
 
 func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		token := c.GetHeader("token")
+		token := c.GetHeader("Authorization")
 		fmt.Println("header-token", token)
 		if token == "" {
 			c.JSON(http.StatusOK, gin.H{
-				"code": 2003,
-				"msg":  "请求头中auth为空",
+				"code": 70,
+				"msg":  "请求头中Authorization为空",
 			})
 			c.Abort()
 			return
@@ -24,7 +24,7 @@ func Auth() gin.HandlerFunc {
 		mc, err := util.ParseToken(token)
 		if err != nil {
 			c.JSON(http.StatusOK, gin.H{
-				"code": 2005,
+				"code": 71,
 				"msg":  "无效的Token",
 			})
 			c.Abort()

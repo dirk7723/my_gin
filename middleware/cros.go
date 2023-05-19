@@ -9,6 +9,7 @@ import (
 func Cors() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		// 允许 Origin 字段中的域发送请求
+		//context.Writer.Header().Add("Access-Control-Allow-Origin", context.GetHeader("Origin"))
 		context.Writer.Header().Add("Access-Control-Allow-Origin", "*")
 		// 设置预验请求有效期为 70000 秒
 		context.Writer.Header().Set("Access-Control-Max-Age", "70000")
